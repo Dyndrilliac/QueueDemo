@@ -22,9 +22,9 @@ Queue::Queue()
 
 void Queue::Clear()
 {
-    this->head = gcnew Node(nullptr, nullptr, tail);
-    this->tail = gcnew Node(nullptr, head, nullptr);
-    this->size = 0;
+    this->Head = gcnew Node(nullptr, nullptr, this->Tail);
+    this->Tail = gcnew Node(nullptr, this->Head, nullptr);
+    this->Size = 0;
 }
 
 Object^ Queue::Dequeue()
@@ -34,36 +34,36 @@ Object^ Queue::Dequeue()
         throw gcnew Exception("Queue is empty!");
     }
 
-    Object^ o = this->tail->Prev->Data;
+    Object^ o = this->Tail->Previous->Data;
 
-    Node^ temp = gcnew Node(this->tail->Prev);
-    temp = temp->Prev;
-    temp->Next = this->tail;
-    this->tail->Prev = temp;
+    Node^ temp = gcnew Node(this->Tail->Previous);
+    temp = temp->Previous;
+    temp->Next = this->Tail;
+    this->Tail->Previous = temp;
 
     return (o);
 }
 
 void Queue::Enqueue(Object^ o)
 {
-    if (this->size >= (UInt32::MaxValue - 1))
+    if (this->Size >= (UInt32::MaxValue - 1))
     {
         throw gcnew Exception("Queue is full!");
     }
 
     if (this->Empty)
     {
-        Node^ t = gcnew Node(o, this->head, this->tail);
-        this->head->Next = t;
-        this->tail->Prev = t;
+        Node^ t = gcnew Node(o, this->Head, this->Tail);
+        this->Head->Next = t;
+        this->Tail->Previous = t;
         this->Size = 1;
     }
     else
     {
-        Node^ g = gcnew Node(o, this->head, this->head->Next);
-        Node^ k = this->head->Next;
-        k->Prev = g;
-        this->head->Next = g;
+        Node^ g = gcnew Node(o, this->Head, this->Head->Next);
+        Node^ k = this->Head->Next;
+        k->Previous = g;
+        this->Head->Next = g;
         this->Size++;
     }
 }
@@ -77,6 +77,16 @@ bool Queue::Empty::get()
     return (this->size == 0);
 }
 
+Node^ Queue::Head::get()
+{
+    return (this->tail);
+}
+
+void Queue::Head::set(Node^ value)
+{
+    this->tail = value;
+}
+
 UInt32 Queue::Size::get()
 {
     return (this->size);
@@ -85,4 +95,14 @@ UInt32 Queue::Size::get()
 void Queue::Size::set(UInt32 value)
 {
     this->size = value;
+}
+
+Node^ Queue::Tail::get()
+{
+    return (this->head);
+}
+
+void Queue::Tail::set(Node^ value)
+{
+    this->head = value;
 }

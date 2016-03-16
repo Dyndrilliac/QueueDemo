@@ -15,21 +15,21 @@ Node::Node()
 {
     this->Data = nullptr;
     this->Next = nullptr;
-    this->Prev = nullptr;
+    this->Previous = nullptr;
 }
 
 Node::Node(Node^ newNode)
 {
     this->Data = newNode->Data;
     this->Next = newNode->Next;
-    this->Prev = newNode->Prev;
+    this->Previous = newNode->Previous;
 }
 
-Node::Node(Object^ newData, Node^ newNext, Node^ newPrev)
+Node::Node(Object^ newData, Node^ newNext, Node^ newPrevious)
 {
     this->Data = newData;
     this->Next = newNext;
-    this->Prev = newPrev;
+    this->Previous = newPrevious;
 }
 
 /*
@@ -41,27 +41,27 @@ Object^ Node::Data::get()
     return this->data;
 }
 
-void    Node::Data::set(Object^ value)
+void Node::Data::set(Object^ value)
 {
     this->data = value;
 }
 
-Node^   Node::Next::get()
+Node^ Node::Next::get()
 {
     return this->next;
 }
 
-void    Node::Next::set(Node^ value)
+void Node::Next::set(Node^ value)
 {
     this->next = value;
 }
 
-Node^   Node::Prev::get()
+Node^ Node::Previous::get()
 {
-    return this->prev;
+    return this->previous;
 }
 
-void    Node::Prev::set(Node^ value)
+void Node::Previous::set(Node^ value)
 {
-    this->prev = value;
+    this->previous = value;
 }

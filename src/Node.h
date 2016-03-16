@@ -20,7 +20,7 @@ public ref class Node
 
         Node();
         Node(Node^ newNode);
-        Node(Object^ newData, Node^ newNext, Node^ newPrev);
+        Node(Object^ newData, Node^ newNext, Node^ newPrevious);
 
         /*
             Properties (Getters/Setters)
@@ -38,7 +38,7 @@ public ref class Node
             void    set(Node^ value);
         }
 
-        property Node^ Prev
+        property Node^ Previous
         {
             Node^   get();
             void    set(Node^ value);
@@ -52,5 +52,5 @@ public ref class Node
 
         Object^ data;
         Node^   next;
-        Node^   prev;
+        Node^   previous;
 };
